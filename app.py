@@ -10,8 +10,12 @@ from werkzeug import secure_filename
 # Initialize the Flask application
 app = Flask(__name__)
 
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 # This is the path to the upload directory
-app.config['UPLOAD_FOLDER'] = 'uploads/'
+#app.config['UPLOAD_FOLDER'] = 'uploads/'
 # These are the extension that we are accepting to be uploaded
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -55,8 +59,4 @@ def uploaded_file(filename):
                                filename)
 
 if __name__ == '__main__':
-    app.run(
-        host="0.0.0.0",
-        port=int("80"),
-        debug=True
-    )
+    app.run()
